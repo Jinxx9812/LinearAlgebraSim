@@ -29,6 +29,7 @@ public class DrawCube : MonoBehaviour
     private void Update()
     {
         RestartCubePosition();
+        RotationCube();
         DrawCube3D();
     }
 
@@ -72,6 +73,14 @@ public class DrawCube : MonoBehaviour
         for(int i = 0; i < cubeIndex.Length; i++)
         {
             lineRenderer.SetPosition(i, vertices[cubeIndex[i]]);
+        }
+    }
+
+    private void RotationCube()
+    {
+        for (int i = 0;i < vertices.Length;i++)
+        {
+            vertices[i] = QuaternionManager.instance.RotatePoint(vertices[i]);
         }
     }
 }
