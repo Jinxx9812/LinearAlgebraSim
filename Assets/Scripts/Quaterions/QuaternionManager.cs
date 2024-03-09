@@ -2,29 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuaternionManager : MonoBehaviour
+public class QuaternionManager
 {
-    public static QuaternionManager instance;
-
-    [SerializeField]
-    [Range(0,360)]
-    float angle = 0;
-
-    [SerializeField] Vector3 axis = new(0, 1, 0);
-
-    private void Awake()
-    {
-        if(instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    public Vector3 RotatePoint(Vector3 p)
+    public Vector3 RotatePoint(float angle, Vector3 axis, Vector3 p)
     {
         float radianAngle = angle * Mathf.PI / 180;
         Vector3 rotateAxis = axis;

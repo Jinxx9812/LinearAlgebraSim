@@ -1,12 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DrawCube : MonoBehaviour
 {
-    private LineRenderer lineRenderer;
+    QuaternionManager myQuaternion = new();
+    [Header("Quaterion component")]
+    [SerializeField]
+    [Range(0, 360)]
+    float angle = 0;
+    [SerializeField] Vector3 axis = new(0, 1, 0);
 
-    private Vector3 center = new();
+    [Header("Scale component")]
+    [SerializeField] Vector3 scale = Vector3.one;
+    ScaleManager myScale = new();
+
+    [Header("Position component")]
+    [SerializeField] Vector3 position = Vector3.zero;
+    PositionManager myPos = new();
+
+    private LineRenderer lineRenderer;
 
     private Vector3[] vertices = new Vector3[]
     {        
@@ -30,6 +44,8 @@ public class DrawCube : MonoBehaviour
     {
         RestartCubePosition();
         RotationCube();
+        ResizeCube();
+        SetPosition();
         DrawCube3D();
     }
 
@@ -47,11 +63,6 @@ public class DrawCube : MonoBehaviour
             new Vector3(-0.5f, 0.5f, 0.5f)    // Vertex 7
 
         };
-        center = transform.position;
-        for (int i = 0; i < vertices.Length; i++)
-        {
-            vertices[i] = vertices[i] + center;
-        }
     }
 
     private void DrawCube3D()
@@ -80,7 +91,23 @@ public class DrawCube : MonoBehaviour
     {
         for (int i = 0;i < vertices.Length;i++)
         {
-            vertices[i] = QuaternionManager.instance.RotatePoint(vertices[i]);
+            vertices[i] = myQuaternion.RotatePoint(angle, axis, vertices[i]);
+        }
+    }
+
+    private void ResizeCube()
+    {
+        for(int i = 0; i < vertices.Length; i++)
+        {
+            vertices[i] = myScale.ScalePoint(scale, vertices[i]);
+        }
+    }
+
+    private void SetPosition()
+    {
+        for(int i=0; i < vertices.Length; i++)
+        {
+            vertices[i] = myPos.SetPointPos(position, vertices[i]);
         }
     }
 }
