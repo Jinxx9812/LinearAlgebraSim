@@ -4,5 +4,26 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 547ce9791a58e63478b1a7a2ba6b69ce
+  - enabled: 1
+    path: Assets/Scenes/DotProduct.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/CrossProdcut.unity
+    guid: e09d3637cb817a54c94e39874c541946
+  - enabled: 1
+    path: Assets/Scenes/MatrixTransformation.unity
+    guid: 6a28941ba17c68a489b1fee2a6edf6f8
+  - enabled: 0
+    path: Assets/Scenes/Quaternions.unity
+    guid: 1920181e5785ee146a0a1fadb56ffa7b
+  - enabled: 1
+    path: Assets/Scenes/ReflexMatrix.unity
+    guid: 6736bdd2aa7bc484ea13a0397c9f9585
+  - enabled: 1
+    path: Assets/Scenes/Rotations.unity
+    guid: a42aa73e471edb04e91426a63f158c67
   m_configObjects: {}
