@@ -5,7 +5,7 @@ public class AxisLineProjection : MonoBehaviour
     public LineRenderer lineRendererX;
     public LineRenderer lineRendererY;
     public LineRenderer lineRendererZ;
-    public float lineLength = 5.0f; // Longitud de las líneas
+    public float lineLength = 5.0f; // Longitud 
 
     void Start()
     {

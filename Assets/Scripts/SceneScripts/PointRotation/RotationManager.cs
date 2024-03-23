@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class RotationManager : MonoBehaviour
 {
     [SerializeField] Transform rotationReference;
-    [SerializeField] [Range(0, 360)] float angle = 0.0f;
+    [SerializeField] float angle = 0.0f;
     [SerializeField] Slider angleSlider;
 
     private Vector2 initPos;

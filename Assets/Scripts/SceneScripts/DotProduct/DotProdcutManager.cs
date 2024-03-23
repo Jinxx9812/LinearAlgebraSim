@@ -7,7 +7,7 @@ public class DotProductManager : MonoBehaviour
     [SerializeField] GameObject Vector2;
     [SerializeField] TMP_Text v1dotv2Txt;
     [SerializeField] LineRenderer slerpLineRenderer;
-    public int curveResolution = 20; // La cantidad de puntos a lo largo de la curva.
+    public int curveResolution = 20; 
 
     void Update()
     {
@@ -25,14 +25,15 @@ public class DotProductManager : MonoBehaviour
         Vector3 b = (p1 - c).normalized;
 
         float adotb = Vector3.Dot(a, b);
-        float angle = Mathf.Acos(adotb) * Mathf.Rad2Deg; // Calcula el ángulo en grados
+        float angle = Mathf.Acos(adotb) * Mathf.Rad2Deg;
+
         return adotb.ToString("F1") + ", Angle: " + angle.ToString("F1") + "°";
     }
 
 
     private void DrawSlerpCurve(Vector3 v1, Vector3 v2, Vector3 c)
     {
-        // Normalizar los vectores y dividir por 3 para mantener la curva dentro de una escala constante.
+        
         Vector3 normV1 = (v1 - c).normalized / 3;
         Vector3 normV2 = (v2 - c).normalized / 3;
 
@@ -41,8 +42,7 @@ public class DotProductManager : MonoBehaviour
         {
             float t = i / (float)(curveResolution - 1);
             Vector3 curvePoint = Vector3.Slerp(normV1, normV2, t);
-            // Dado que los vectores son normalizados y luego divididos por 3, 
-            // el punto de curva debe ser reescalado hacia su posición correcta respecto al origen.
+
             slerpLineRenderer.SetPosition(i, curvePoint * 3);
         }
     }

@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI; // Necesitas este namespace para trabajar con la UI de Unity.
+using UnityEngine.UI;
 
 public class SliderObjectControl : MonoBehaviour
 {
@@ -11,13 +11,11 @@ public class SliderObjectControl : MonoBehaviour
 
     void OnEnable()
     {
-        // Suscribirse al evento.
         ObjectSelector.OnObjectSelected += UpdateCurrentObject;
     }
 
     void OnDisable()
     {
-        // Cancelar la suscripción al evento.
         ObjectSelector.OnObjectSelected -= UpdateCurrentObject;
     }
 
@@ -29,7 +27,6 @@ public class SliderObjectControl : MonoBehaviour
 
     void Start()
     {
-        // Configurar los listeners para los sliders.
         sliderX.onValueChanged.AddListener((value) => UpdateObjectPosition('x', value));
         sliderY.onValueChanged.AddListener((value) => UpdateObjectPosition('y', value));
         sliderZ.onValueChanged.AddListener((value) => UpdateObjectPosition('z', value));

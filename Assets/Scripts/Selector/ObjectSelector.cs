@@ -4,10 +4,10 @@ public class ObjectSelector : MonoBehaviour
 {
     public Material selectedMaterial;
     private Material defaultMaterial;
-    public static GameObject selectedObject; // Hacerlo público y estático para acceder desde otros scripts.
+    public static GameObject selectedObject; 
 
     public delegate void ObjectSelected(GameObject obj);
-    public static event ObjectSelected OnObjectSelected; // Evento para notificar cuando un objeto es seleccionado.
+    public static event ObjectSelected OnObjectSelected;
 
     void SelectObject(GameObject obj)
     {
@@ -22,7 +22,7 @@ public class ObjectSelector : MonoBehaviour
 
         Debug.Log("Objeto seleccionado: " + obj.name);
 
-        OnObjectSelected?.Invoke(obj); // Invocar el evento.
+        OnObjectSelected?.Invoke(obj); 
     }
 
     void Update()

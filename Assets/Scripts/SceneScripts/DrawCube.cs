@@ -51,7 +51,6 @@ public class DrawCube : MonoBehaviour
     {
         lineRenderer = GetComponent<LineRenderer>();
 
-        // Inicializar los sliders de movimiento y escala
         moveSliderX.gameObject.SetActive(toggleX.isOn);
         moveSliderY.gameObject.SetActive(toggleY.isOn);
         moveSliderZ.gameObject.SetActive(toggleZ.isOn);
@@ -60,15 +59,13 @@ public class DrawCube : MonoBehaviour
         scaleSliderY.gameObject.SetActive(toggleY.isOn);
         scaleSliderZ.gameObject.SetActive(toggleZ.isOn);
 
-        // Asegúrate de que los sliders de escala tengan un valor por defecto que represente la escala inicial.
         scaleSliderX.value = scale.x;
         scaleSliderY.value = scale.y;
         scaleSliderZ.value = scale.z;
         
-        // Suscribirse a los eventos de los sliders
-        scaleSliderX.onValueChanged.AddListener(newValue => UpdateScaleX(newValue));
-        scaleSliderY.onValueChanged.AddListener(newValue => UpdateScaleY(newValue));
-        scaleSliderZ.onValueChanged.AddListener(newValue => UpdateScaleZ(newValue));
+        scaleSliderX.onValueChanged.AddListener(newValue => UpdateScale(newValue, 'x'));
+        scaleSliderY.onValueChanged.AddListener(newValue => UpdateScale(newValue, 'y'));
+        scaleSliderZ.onValueChanged.AddListener(newValue => UpdateScale(newValue, 'z'));
     }
 
 
@@ -85,7 +82,6 @@ public class DrawCube : MonoBehaviour
 
     private void UpdateAxisFromToggles()
     {
-        // Controlar la visibilidad de los sliders de movimiento y de escala basado en los toggles.
         moveSliderX.gameObject.SetActive(toggleX.isOn);
         moveSliderY.gameObject.SetActive(toggleY.isOn);
         moveSliderZ.gameObject.SetActive(toggleZ.isOn);
@@ -94,10 +90,8 @@ public class DrawCube : MonoBehaviour
         scaleSliderY.gameObject.SetActive(toggleY.isOn);
         scaleSliderZ.gameObject.SetActive(toggleZ.isOn);
 
-        // Activar el slider de ángulo si alguno de los toggles está activado
         angleSlider.gameObject.SetActive(toggleX.isOn || toggleY.isOn || toggleZ.isOn);
 
-        // Actualiza los ejes basándose en los estados de los toggles
         axis.x = toggleX.isOn ? 1 : 0;
         axis.y = toggleY.isOn ? 1 : 0;
         axis.z = toggleZ.isOn ? 1 : 0;
@@ -106,7 +100,7 @@ public class DrawCube : MonoBehaviour
 
     private void RotationCube()
     {
-        float angle = angleSlider.value; // Usa el valor del Slider para el ángulo.
+        float angle = angleSlider.value; 
         for (int i = 0; i < vertices.Length; i++)
         {
             vertices[i] = myQuaternion.RotatePoint(angle, axis, vertices[i]);
@@ -156,7 +150,6 @@ lineRenderer.positionCount = cubeIndex.Length;
 
     private void SetPosition()
     {
-        // Usar el valor de los sliders de movimiento para establecer la posición, si el toggle correspondiente está activado.
         if (toggleX.isOn)
         {
             position.x = moveSliderX.value;
@@ -177,34 +170,28 @@ lineRenderer.positionCount = cubeIndex.Length;
     }
 
 
-    private void UpdateScaleX(float newValue)
+        private void UpdateScale(float newValue, char axis)
     {
-        scale.x = newValue;
-        UpdateScale();
-    }
+        switch (axis)
+        {
+            case 'x':
+                scale.x = newValue;
+                break;
+            case 'y':
+                scale.y = newValue;
+                break;
+            case 'z':
+                scale.z = newValue;
+                break;
+        }
 
-    private void UpdateScaleY(float newValue)
-    {
-        scale.y = newValue;
-        UpdateScale();
-    }
-
-    private void UpdateScaleZ(float newValue)
-    {
-        scale.z = newValue;
-        UpdateScale();
-    }
-
-
-    private void UpdateScale()
-    {
-        // Asumiendo que 'myScale' es una clase que maneja la escala y 'ScalePoint' es el método que la actualiza.
         for (int i = 0; i < vertices.Length; i++)
         {
             vertices[i] = myScale.ScalePoint(scale, vertices[i]);
         }
 
-        // Actualizar las posiciones de los vértices en el LineRenderer si es necesario.
         DrawCube3D();
     }
+
+
 }
